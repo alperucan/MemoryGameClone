@@ -30,31 +30,36 @@ public class Circle : MonoBehaviour
     void OnMouseDown()
     {
         //if clicked circle member of flashedCircles then okey else error!
+        //Dogru tiklanan tekrar "Circle" olur
         if (this.gameObject.CompareTag("FlashedCircles"))
         {
             isPressed = true;
-            //Debug.Log("a");
+           
             this.gameObject.GetComponent<Circle>().ChangeColor();
             StartCoroutine(waitOneSec());
             this.gameObject.tag = "Circle";
-            int count = gameController.flashedCircles.IndexOf(gameObject.GetComponent<Circle>() );
-            //Debug.Log(count);
-            //gameController.circleOrderNumbers.
-            if (count < gameController.level-1) 
+            int count = gameController.flashedCircles.IndexOf( gameObject.GetComponent<Circle>() );
+            
+           
+            
+            if (count < GameController.level-1) 
             {
                 gameController.flashedCircles[count + 1].gameObject.tag = "FlashedCircles";  
             }
-            gameController.point += (100 / gameController.level);
-
+            GameController.point += (100 / GameController.level );
+            gameController.levelSpawner.pooledObjects.Add(gameObject.GetComponent<Circle>());
+            
         }
         else
         {
             isPressed = true;
-            // point --
+           
             this.gameObject.GetComponent<Circle>().Change2Red();
             StartCoroutine(waitOneSec());
             gameController.gameOver = false;
-            gameController.point -= (100 / gameController.level);
+            GameController.point -= (100 / GameController.level );
+            //Restartla!
+            gameController.FalseClick();
         }
 
     }

@@ -36,6 +36,9 @@ public class LevelSpawner : MonoBehaviour
       //  ColChange();
 
     }
+    /// <summary>
+    /// Generate Circles
+    /// </summary>
     public void generateCircle() 
     {
         pooledObjects = new List<Circle>();
@@ -66,6 +69,9 @@ public class LevelSpawner : MonoBehaviour
         return pooledObjects[i];
     }
 
+    /// <summary>
+    /// Set Circles positions
+    /// </summary>
     public void setTransforms() 
     {
         for (int i = 0; i < amountToPool; i++)
